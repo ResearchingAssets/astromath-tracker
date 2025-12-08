@@ -21,4 +21,6 @@ export default async function Home() {
       </div>
     </div>
   )
+  console.log("Dashboard loading for user:", session?.user?.name)
+  console.log("Full session:", session)
 }

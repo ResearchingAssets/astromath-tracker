@@ -29,4 +29,5 @@ export default function Login()
       </Card>
     </div>
   )
+  console.log("Login page loaded")
 }
