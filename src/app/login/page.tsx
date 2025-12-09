@@ -1,33 +1,43 @@
+// src/app/login/page.tsx
 "use client"
 
 import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 
-export default function Login()
-  {
+export default function Login() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-950 via-black to-cyan-950">
-      <Card className="w-96 p-10 bg-black/60 backdrop-blur-xl border-purple-500/30">
-        <h1 className="text-center text-5xl font-black mb-12 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-          AstroMathTracker
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black">
+      {/* Animated background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 via-pink-900/30 to-cyan-900/50" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-purple-800/40 via-transparent to-cyan-800/40 animate-pulse" />
+      </div>
+
+      <div className="relative z-10 text-center space-y-20">
+        <h1 className="text-8xl font-black tracking-tight">
+          <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-2xl">
+            AstroMathTracker
+          </span>
         </h1>
-        <div className="space-y-6">
+
+        <div className="space-y-10">
           <Button
-            onClick={() => signIn("credentials", { username: "reminiscxnt" })}
-            className="w-full h-16 text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600"
+            onClick={() => signIn("credentials", { username: "reminiscxnt", callbackUrl: "/dashboard" })}
+            className="h-28 w-96 rounded-3xl bg-gradient-to-r from-purple-600 to-pink-600 text-4xl font-bold text-white shadow-2xl shadow-purple-500/50 hover:shadow-purple-500/70 hover:scale-105 transition-all duration-300"
           >
             Reminiscxnt
           </Button>
+
           <Button
-            onClick={() => signIn("credentials", { username: "jaelyn" })}
-            className="w-full h-16 text-2xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600"
+            onClick={() => signIn("credentials", { username: "jaelyn", callbackUrl: "/dashboard" })}
+            className="h-28 w-96 rounded-3xl bg-gradient-to-r from-cyan-500 to-blue-600 text-4xl font-bold text-white shadow-2xl shadow-cyan-500/50 hover:shadow-cyan-500/70 hover:scale-105 transition-all duration-300"
           >
             Jaelyn
           </Button>
         </div>
-      </Card>
+
+        <p className="text-white/60 text-xl font-light">Choose your universe</p>
+      </div>
     </div>
   )
-  console.log("Login page loaded")
 }

@@ -1,4 +1,3 @@
-// src/app/api/auth/[...nextauth]/route.ts
 import NextAuth from "next-auth"
 
 const users = {
@@ -10,24 +9,20 @@ const handler = NextAuth({
   providers: [
     {
       id: "credentials",
-      name: "Credentials",
+      name: "credentials",
       type: "credentials",
       credentials: {
         username: { label: "Username", type: "text" },
       },
       async authorize(credentials) {
-        // credentials is now properly typed – no more 'any'
-        const username = credentials?.username as keyof typeof users | undefined
-
-        if (!username) return null
-
-        return users[username] ?? null
+        if (!credentials?.username) return null
+        return users[credentials.username as keyof typeof users] || null
       },
     },
   ],
-  pages: {
-    signIn: "/login",
-  },
+  secret: process.env.NEXTAUTH_SECRET,
+  session: { strategy: "jwt" },
+  pages: { signIn: "/" },
 })
 
 export { handler as GET, handler as POST }
